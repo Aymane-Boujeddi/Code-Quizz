@@ -68,8 +68,6 @@ function displayQuizList(data) {
         addQcmQuestion(quiz)
         addTextQuestion(quiz)
         
-        
-        
             })
 }
 
@@ -111,17 +109,14 @@ function showForm(formType) {
 }
 
 function addBooleanQuestion(quiz) {
-    document.querySelector("#booleanForm").addEventListener("submit" , (e)=> {
+    document.querySelector("#booleanForm").onsubmit = function (e) {
         e.preventDefault()
         const booleanQuestion = document.querySelector("#booleanQuestion").value 
         const booleanAnswer = document.querySelector("#booleanAnswer").value 
         const booleanExplanation = document.querySelector("#booleanExplanation").value
         const booleanTimer = document.querySelector("#booleanTimer").value
         const length = quiz.questions.length + 1
-        console.log(booleanAnswer)
-        console.log(booleanQuestion)
-        console.log(booleanExplanation)
-        console.log(booleanTimer)
+        
         const question = {
             id :  length  ,
             type : 'boolean' ,
@@ -134,15 +129,10 @@ function addBooleanQuestion(quiz) {
         quiz.questions.push(question)
         alert("Boolean question added successfully")
         updateLocalStorage(quizData2)
-
-       
-
-
-        
-    })
+    }
 }
 function addQcmQuestion(quiz){
-    document.querySelector("#qcmForm").addEventListener("submit", (e)=>{
+    document.querySelector("#qcmForm").onsubmit = function (e) {
         e.preventDefault()
         const qcmQuestion = document.querySelector("#qcmQuestion").value
         const firstOption = document.querySelector("#qcmOption1").value
@@ -154,6 +144,7 @@ function addQcmQuestion(quiz){
         const qcmExplanation = document.querySelector("#qcmExplanation").value
         const qcmTimer = document.querySelector("#qcmTimer").value
         const length = quiz.questions.length + 1
+        console.log(qcmOptions)
 
         const question = {
             id :  length  ,
@@ -168,11 +159,10 @@ function addQcmQuestion(quiz){
         quiz.questions.push(question)
         alert("Multiple choice question added successfully")
         updateLocalStorage(quizData2)
-
-    })
+    }
 }
 function addTextQuestion(quiz){
-    document.querySelector("#textForm").addEventListener("submit", (e)=>{
+    document.querySelector("#textForm").onsubmit = function (e) {
         e.preventDefault()
         const textQuestion = document.querySelector("#textQuestion").value
         const firstAnswer = document.querySelector("#textAnswer1").value
@@ -195,13 +185,9 @@ function addTextQuestion(quiz){
 
         quiz.questions.push(question)
         updateLocalStorage(quizData2)
-    })
+    }
 
 }
 
 addNewQuiz(quizData2)
 displayQuizList(quizData2)
-
-
-
-

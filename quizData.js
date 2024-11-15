@@ -195,4 +195,4 @@ const quizData =  [
     }
   ];
   
-  localStorage.setItem('quizData2', JSON.stringify(quizData));
+  localStorage.setItem('quizData2', JSON.stringify(quizData2));
