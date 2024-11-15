@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Admin Dashboard</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="admin.css">
+    <script src="admin.js" defer></script>
 </head>
 <body>
     <img src="Items/Images/background.jpg" alt="Background" id="background">
     <header class="header">
-       
         <nav class="navbar">
-            
             <div class="home">
                 <a href="index.html">Home</a>
             </div>
@@ -19,33 +18,29 @@
                 <a href="index.html"><img src="Items/Icons/code-quiz-high-resolution-logo-transparent.png" alt="Logo"></a>
             </div>
             <div class="admin">
-                <a href="quiz.html">Admin</a>
+                <a href="admin.html">Admin</a>
             </div>
-
         </nav>
-        
     </header>
+
     
-    <div class="admin-menu">
+    <main class="dashboard">
         <h2>Admin Dashboard</h2>
-        <button onclick="openForm('qcmForm')">Multiple Choice Question</button>
-        <button onclick="openForm('booleanForm')">True/False Question</button>
-        <button onclick="openForm('textForm')">Text Question</button>
-    </div>
-   
 
-    <div class="content">
-        <section id="quizForm">
-            <h2>Add New Quiz</h2>
-            <form>
+        <section class="add-quiz-section">
+            <h3>Add New Quiz</h3>
+            <form id="addQuizForm">
                 <label for="quizName">Quiz Name:</label>
-                <input type="text" id="quizName" name="quizName" required>
+                <input type="text" id="quizName" required>
 
-                <label for="globalTimer">Global Timer (minutes):</label>
-                <input type="number" id="globalTimer" name="globalTimer" min="1" required>
+                <label for="quizCategory">Category:</label>
+                <input type="text" id="quizCategory" required>
+
+                <label for="quizGlobalTimer">Global timer (Minutes):</label>
+                <input type="number" id="quizGlobalTimer" min="1" required>
 
                 <label for="difficulty">Difficulty:</label>
-                <select id="difficulty" name="difficulty">
+                <select id="quizDifficulty">
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
@@ -55,79 +50,97 @@
             </form>
         </section>
 
-        <!-- Multiple Choice Question Form -->
-        <section id="qcmForm" class="questionForm" style="display:none;">
-            <h2>Add Multiple Choice Question</h2>
-            <form>
-                <label for="qcmQuestion">Question:</label>
-                <textarea id="qcmQuestion" name="question" required></textarea>
+        <section class="quiz-list-section">
+            <h3>Quiz List</h3>
+            <div id="quizList">
+               
+            </div>
+        </section>
+    </main>
 
-                <label for="qcmOptions">Options (Separate with commas):</label>
-                <textarea id="qcmOptions" name="options" required></textarea>
+    <div id="questionModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2></h2>
+            <h3>Add New Question</h3>
+            
+            <div class="question-type-selection">
+                <button onclick="showForm('#qcmForm')">Multiple Choice (QCM)</button>
+                <button onclick="showForm('#booleanForm')">True/False</button>
+                <button onclick="showForm('#textForm')">Text</button>
+            </div>
+
+            <form id="qcmForm" class="question-form" style="display:none;">
+                <h4>Multiple Choice Question</h4>
+                <label for="qcmQuestion">Question:</label>
+                <textarea id="qcmQuestion" required></textarea>
+
+                <label for="qcmOptions">Options :</label>
+                <textarea id="qcmOption1" placeholder="Option 1" required></textarea>
+                <textarea id="qcmOption2" placeholder="Option 2" required></textarea>
+                <textarea id="qcmOption3" placeholder="Option 3" required></textarea>
+                <textarea id="qcmOption4" placeholder="Option 4" required></textarea>
+                
 
                 <label for="qcmAnswer">Correct Answer:</label>
-                <input type="text" id="qcmAnswer" name="answer" required>
+                <!-- <input type="text" id="qcmAnswer" required> -->
+                <select id="qcmAnswer">
+                    <option value="0">Option 1</option>
+                    <option value="1">Option 2</option>
+                    <option value="2">Option 3</option>
+                    <option value="3">Option 4</option>
+                </select>
 
-                <label for="qcmTimer">Timer (seconds):</label>
-                <input type="number" id="qcmTimer" name="timer" min="1">
+
 
                 <label for="qcmExplanation">Explanation:</label>
-                <textarea id="qcmExplanation" name="explanation"></textarea>
+                <textarea id="qcmExplanation"></textarea>
 
+                <label for="qcmTimer">Timer (Seconds):</label>
+                <input type="number" id="qcmTimer" min="1" required>
+                
                 <button type="submit">Add Question</button>
             </form>
-        </section>
 
-        <!-- True/False Question Form -->
-        <section id="booleanForm" class="questionForm" style="display:none;">
-            <h2>Add True/False Question</h2>
-            <form>
+            <form id="booleanForm" class="question-form" style="display:none;">
+                <h4>True/False Question</h4>
                 <label for="booleanQuestion">Question:</label>
-                <textarea id="booleanQuestion" name="question" required></textarea>
+                <textarea id="booleanQuestion" required></textarea>
 
                 <label for="booleanAnswer">Correct Answer:</label>
-                <select id="booleanAnswer" name="answer">
+                <select id="booleanAnswer">
                     <option value="true">True</option>
                     <option value="false">False</option>
                 </select>
 
-                <label for="booleanTimer">Timer (seconds):</label>
-                <input type="number" id="booleanTimer" name="timer" min="1">
-
                 <label for="booleanExplanation">Explanation:</label>
-                <textarea id="booleanExplanation" name="explanation"></textarea>
+                <textarea id="booleanExplanation"></textarea>
+                
+                <label for="booleanTimer">Timer (Seconds):</label>
+                <input type="number" id="booleanTimer" min="1" required>
 
                 <button type="submit">Add Question</button>
             </form>
-        </section>
 
-        <!-- Text Question Form -->
-        <section id="textForm" class="questionForm" style="display:none;">
-            <h2>Add Text Question</h2>
-            <form>
+            <form id="textForm" class="question-form" style="display:none;">
+                <h4>Text Question</h4>
                 <label for="textQuestion">Question:</label>
-                <textarea id="textQuestion" name="question" required></textarea>
+                <textarea id="textQuestion" required></textarea>
 
-                <label for="textAnswer">Correct Answer:</label>
-                <input type="text" id="textAnswer" name="answer" required>
-
-                <label for="textTimer">Timer (seconds):</label>
-                <input type="number" id="textTimer" name="timer" min="1">
+                <label for="textAnswer">Accepted Answers :</label>
+                <textarea id="textAnswer1" placeholder="Answer 1" required></textarea>
+                <textarea id="textAnswer2" placeholder="Answer 2" required></textarea>
+                <textarea id="textAnswer3" placeholder="Answer 3" required></textarea>
 
                 <label for="textExplanation">Explanation:</label>
-                <textarea id="textExplanation" name="explanation"></textarea>
+                <textarea id="textExplanation"></textarea>
+                
+                <label for="textTimer">Timer (Seconds):</label>
+                <input type="number" id="textTimer" min="1" required>
 
                 <button type="submit">Add Question</button>
             </form>
-        </section>
+        </div>
     </div>
-
-   
-    <script>
-        function openForm(formId) {
-            document.querySelectorAll('.questionForm').forEach(form => form.style.display = 'none');
-            document.getElementById(formId).style.display = 'block';
-        }
-    </script>
 </body>
 </html>

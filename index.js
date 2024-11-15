@@ -29,6 +29,10 @@ const quizContainer = document.querySelector(".quiz-container");
 const searchInput = document.getElementById("searchInput");
 const difficultySelect = document.getElementById("difficulty");
 const categorySelect = document.getElementById("category");
+console.log(quizData2)
+console.log(typeof quizData2)
+
+
 
 function renderQuizzes(data) {
   quizContainer.innerHTML = ""; 
